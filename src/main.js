@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router/index'
 import './plugins/element.js'
+import 'element-ui/lib/theme-chalk/display.css'
 // 导入全局样式表
 import './assets/css/global.css'
 

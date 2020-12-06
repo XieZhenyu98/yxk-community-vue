@@ -1,7 +1,9 @@
 <template>
   <el-container>
     <!-- 头部 -->
-    <el-header>Header</el-header>
+    <el-header height="70px" class="header-home">
+      <Header></Header>
+    </el-header>
     <!-- 主体 -->
     <el-main>
       <!-- 中间主要内容 -->
@@ -9,36 +11,33 @@
         <!-- 第一行 -->
         <el-row :gutter="20">
           <!-- 置顶 -->
-          <el-col :span="16" class="topping-col"><Topping></Topping></el-col>
+          <el-col :span="12" class="topping-col" :offset="3">
+            <el-row><Topping></Topping></el-row>
+            <el-row><plate></plate></el-row>
+          </el-col>
           <!-- 温馨通道和签到 -->
-          <el-col :span="8">
+          <el-col :span="6">
             <!-- 温馨通道 -->
             <el-row><WarmChannle></WarmChannle></el-row>
             <!-- 签到 -->
-            <el-row><Registration></Registration></el-row>
-          </el-col>
-        </el-row>
-        <!-- 第二行 -->
-        <el-row :gutter="20">
-          <!-- 板块 -->
-          <el-col :span="16" class="topping-col"><plate></plate></el-col>
-          <!-- 温馨通道和签到 -->
-          <el-col :span="8">
-            <!-- 温馨通道 -->
+            <el-row class="Registration"><Registration></Registration></el-row>
+            <!-- 排行榜 -->
             <el-row><Ranking></Ranking></el-row>
-            <!-- 签到 -->
+            <!-- 热榜 -->
             <el-row><Hot></Hot></el-row>
+            <!-- 广告 -->
             <el-row><Advertisement></Advertisement></el-row>
+            <!-- 友情链接 -->
             <el-row><Links></Links></el-row>
           </el-col>
         </el-row>
         <!-- 第三行底部 -->
-        <el-row>
-          <hr style=" height:2px;border:none;border-top:1px solid #B3B3B2;" />
-          <span>Powered by 谢振瑜 ©2019 xiezhenyu98.com</span><br/>
-          <span>桂ICP备19003999号   邮箱: 751811152@qq.com</span>
-          <br/>
-          <br/>
+        <el-row class="bottom-row">
+          <el-col :span="18" :offset="3">
+            <hr style=" height:2px;border:none;border-top:1px solid #B3B3B2;" />
+            <span>Powered by 谢振瑜 ©2019 xiezhenyu98.com</span><br/>
+            <span>桂ICP备19003999号   邮箱: 751811152@qq.com</span>
+          </el-col>
         </el-row>
       </div>
     </el-main>
@@ -54,9 +53,11 @@ import Ranking from '@/components/home/Ranking'
 import Hot from '@/components/home/Hot'
 import Advertisement from '@/components/home/Advertisement'
 import Links from '@/components/home/Links'
+import Header from '@/components/home/Header'
 export default {
   name: 'Home',
   components: {
+    Header,
     Plate,
     WarmChannle,
     Registration,
@@ -72,6 +73,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.header-home{
+  vertical-align: center;
+  horiz-align: center;
+}
 .el-container{
   height: 100%;
   > .el-header{
@@ -88,10 +93,6 @@ export default {
   background-color: #F2F2F2;
 }
 
-.home-main{
-  width: 70%;
-}
-
 .bg-purple{
   background-color: #2c3e50;
 }
@@ -99,6 +100,12 @@ export default {
   margin-bottom: 20px;
   &:last-child {
     margin-bottom: 0;
+  }
+}
+
+.bottom-row {
+  .el-col {
+    margin-bottom: 30px;
   }
 }
 </style>

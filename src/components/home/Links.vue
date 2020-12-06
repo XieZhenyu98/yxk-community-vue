@@ -1,11 +1,15 @@
 <template>
-  <el-card class="box-card">
+  <el-card class="box-card" align="left">
     <div slot="header" class="clearfix">
       <span>友情链接</span>
-      <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
     </div>
     <div class="text item">
-      友情链接
+      <el-row :gutter="5">
+        <el-col :span="6">百度</el-col>
+        <el-col :span="6">新浪</el-col>
+        <el-col :span="6">码云</el-col>
+        <el-col :span="6">Github</el-col>
+      </el-row>
     </div>
   </el-card>
 </template>

@@ -12,15 +12,32 @@
           </el-submenu>
         </el-menu>
       </div>
+      <DynamicList></DynamicList>
       <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <DynamicList></DynamicList>
+      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <DynamicList></DynamicList>
+      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <DynamicList></DynamicList>
+      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <DynamicList></DynamicList>
+      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <DynamicList></DynamicList>
+      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <DynamicList></DynamicList>
       <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
     </el-card>
   </div>
 </template>
 
 <script>
+import DynamicList from '@/components/home/DynamicList'
 export default {
   name: 'Plate',
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    DynamicList
+  },
   data () {
     return {
       activeIndex: ''

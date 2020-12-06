@@ -1,13 +1,13 @@
 <template>
-  <el-card class="box-card">
-    <div slot="header" class="clearfix">
-      <span>打卡签到</span>
-      <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-    </div>
-    <div class="text item">
-      打卡签到
-    </div>
-  </el-card>
+  <el-calendar :range="['2019-03-04', '2019-03-10']" class="calendar-el">
+    <template
+      slot="dateCell"
+      slot-scope="{date, data}">
+      <p :class="data.isSelected ? 'is-selected' : ''">
+        {{ data.day.split('-').slice(2).join('-') }} {{ data.isSelected ? '✔️' : ''}}
+      </p>
+    </template>
+  </el-calendar>
 </template>
 
 <script>
@@ -17,5 +17,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 </style>
