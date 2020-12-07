@@ -1,19 +1,18 @@
 <template>
   <el-row :gutter="6">
     <el-col :span="3">
-      <img src="../../assets/user.jpg" width="100%">
+      <img :src="this.$http.defaults.baseURL+dyItem.userVo.image" width="100%">
     </el-col>
     <el-col :span="21" class="margin-bottom-col">
       <el-row :gutter="2" align="bottom">
-        <el-col :span="3"><el-tag size="small">大学</el-tag></el-col>
-        <el-col :span="21"><span> 基于 layui 的极简社区页面模版</span></el-col>
+        <el-col :span="24"><span><el-tag size="small" style="margin-right: 10px;margin-left: 5px">{{ dyItem.sonModule.moduleName }}</el-tag>{{dyItem.title}}</span></el-col>
       </el-row>
       <el-row :gutter="2" align="bottom">
-        <el-col :span="3">闲心</el-col>
-        <el-col :span="3"><span style="background-color: orange; border-radius: 3px;color: #EBEEF5">VIP11</span></el-col>
-        <el-col :span="5">2017-11-30</el-col>
-        <el-col :span="3"><i class="el-icon-sugar"></i> 60</el-col>
-        <el-col :span="3" :offset="7"><span><i class="el-icon-chat-dot-round"></i> 299</span></el-col>
+        <el-col :span="3">{{dyItem.userVo.username}}</el-col>
+        <el-col :span="3"><span style="background-color: orange; border-radius: 3px;color: #EBEEF5">VIP{{dyItem.userVo.level}}</span></el-col>
+        <el-col :span="5">{{ dyItem.time.split(" ")[0] }}</el-col>
+        <el-col :span="3"><i class="el-icon-sugar"></i> {{ dyItem.money }}</el-col>
+        <el-col :span="3" :offset="7"><span><i class="el-icon-chat-dot-round"></i> {{ dyItem.times }}</span></el-col>
       </el-row>
     </el-col>
   </el-row>
@@ -21,7 +20,8 @@
 
 <script>
 export default {
-  name: 'DynamicList'
+  name: 'DynamicList',
+  props: ['dyItem']
 }
 </script>
 

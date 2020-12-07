@@ -3,28 +3,14 @@
     <el-card class="box-card" align="left">
       <div slot="header" class="clearfix">
         <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="1">全部动态</el-menu-item>
-          <el-submenu index="2">
-            <template slot="title">大学</template>
-            <el-menu-item index="2-1">选项1</el-menu-item>
-            <el-menu-item index="2-2">选项2</el-menu-item>
-            <el-menu-item index="2-3">选项3</el-menu-item>
+          <el-menu-item index="all">全部动态</el-menu-item>
+          <el-submenu :key="item.moduleName+''" :index="item.moduleName+''" v-for="item in menuList">
+            <template slot="title">{{ item.moduleName }}</template>
+            <el-menu-item :key="itemSon.id" :index="itemSon.id+''" v-for="itemSon in item.sonModuleList">{{ itemSon.moduleName }}</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
-      <DynamicList></DynamicList>
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-      <DynamicList></DynamicList>
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-      <DynamicList></DynamicList>
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-      <DynamicList></DynamicList>
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-      <DynamicList></DynamicList>
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-      <DynamicList></DynamicList>
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-      <DynamicList></DynamicList>
+<!--      <DynamicList></DynamicList>-->
       <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
     </el-card>
   </div>
@@ -40,11 +26,17 @@ export default {
   },
   data () {
     return {
-      activeIndex: ''
+      activeIndex: '',
+      menuList: []
     }
   },
   methods: {
     handleSelect () {}
+  },
+  async created () {
+    const { data: res } = (await this.$http.get('fatherModule/select/0/10'))
+    this.menuList = res.data.records
+    console.log(this.menuList)
   }
 }
 </script>

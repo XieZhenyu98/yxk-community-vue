@@ -3,16 +3,10 @@
     <div slot="header" class="clearfix">
       <span style="font-size: 14px; color: #303133;">置顶</span>
     </div>
-    <DynamicList></DynamicList>
-    <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-    <DynamicList></DynamicList>
-    <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-    <DynamicList></DynamicList>
-    <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-    <DynamicList></DynamicList>
-    <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-    <DynamicList></DynamicList>
-    <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+    <div :key="item.id" v-for="item in topList">
+      <DynamicList :dyItem="item"></DynamicList>
+      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+    </div>
   </el-card>
 </template>
 
@@ -30,8 +24,13 @@ export default {
     return {
       tableData: {
         date: '天气真好'
-      }
+      },
+      topList: []
     }
+  },
+  async created () {
+    const { data: res } = (await this.$http.get('content/listOfTop'))
+    this.topList = res.data
   }
 }
 </script>

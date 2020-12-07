@@ -1,7 +1,7 @@
 <template>
   <el-container>
     <!-- 头部 -->
-    <el-header height="70px" class="header-home">
+    <el-header height="60px" class="header-home">
       <Header></Header>
     </el-header>
     <!-- 主体 -->
@@ -9,10 +9,13 @@
       <!-- 中间主要内容 -->
       <div class="home-main">
         <!-- 第一行 -->
+        <HeaderNext></HeaderNext>
         <el-row :gutter="20">
           <!-- 置顶 -->
           <el-col :span="12" class="topping-col" :offset="3">
+            <!-- 置顶 -->
             <el-row><Topping></Topping></el-row>
+            <!-- 板块 -->
             <el-row><plate></plate></el-row>
           </el-col>
           <!-- 温馨通道和签到 -->
@@ -54,9 +57,14 @@ import Hot from '@/components/home/Hot'
 import Advertisement from '@/components/home/Advertisement'
 import Links from '@/components/home/Links'
 import Header from '@/components/home/Header'
+import HeaderNext from '@/components/home/HeaderNext'
 export default {
   name: 'Home',
+  data () {
+    return {}
+  },
   components: {
+    HeaderNext,
     Header,
     Plate,
     WarmChannle,
@@ -80,7 +88,7 @@ export default {
 .el-container{
   height: 100%;
   > .el-header{
-    background-color: #488FCE;
+    background-color: #393D49;
   }
   > .el-footer{
     background-color: #488FCE;
@@ -91,6 +99,7 @@ export default {
   display: flex;
   justify-content: center;
   background-color: #F2F2F2;
+  padding: 0;
 }
 
 .bg-purple{
