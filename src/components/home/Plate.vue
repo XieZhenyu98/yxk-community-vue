@@ -2,16 +2,18 @@
   <div>
     <el-card class="box-card" align="left">
       <div slot="header" class="clearfix">
-        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-          <el-menu-item index="all">全部动态</el-menu-item>
+        <el-menu @select="handleSelect" :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
+          <el-menu-item :key="0" index="all">全部动态</el-menu-item>
           <el-submenu :key="item.moduleName+''" :index="item.moduleName+''" v-for="item in menuList">
             <template slot="title">{{ item.moduleName }}</template>
             <el-menu-item :key="itemSon.id" :index="itemSon.id+''" v-for="itemSon in item.sonModuleList">{{ itemSon.moduleName }}</el-menu-item>
           </el-submenu>
         </el-menu>
       </div>
-<!--      <DynamicList></DynamicList>-->
-      <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      <div :key="content.id" v-for="content in contentList">
+        <DynamicList :dyItem="content"></DynamicList>
+        <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+      </div>
     </el-card>
   </div>
 </template>
@@ -26,17 +28,28 @@ export default {
   },
   data () {
     return {
-      activeIndex: '',
-      menuList: []
+      activeIndex: 'all',
+      menuList: [],
+      module_id: 111111111111111,
+      contentList: []
     }
   },
   methods: {
-    handleSelect () {}
+    async handleSelect (key) {
+      if (key === 'all') {
+        const { data: resPate } = (await this.$http.get('content/0/10'))
+        this.contentList = resPate.data.records
+      } else {
+        const { data: resPate } = (await this.$http.get('content/0/5/' + key))
+        this.contentList = resPate.data.records
+      }
+    }
   },
   async created () {
     const { data: res } = (await this.$http.get('fatherModule/select/0/10'))
+    const { data: resPate } = (await this.$http.get('content/0/10'))
+    this.contentList = resPate.data.records
     this.menuList = res.data.records
-    console.log(this.menuList)
   }
 }
 </script>
