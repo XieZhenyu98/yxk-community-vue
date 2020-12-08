@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router/index'
 import './plugins/element.js'
 import 'element-ui/lib/theme-chalk/display.css'
+// 添加图标
+import './assets/fonts/iconfont.css'
 // 导入全局样式表
 import './assets/css/global.css'
 import axios from 'axios'

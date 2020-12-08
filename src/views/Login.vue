@@ -5,6 +5,9 @@
       <div class="avatar_box">
         <img src="../assets/yklogo1.png"/>
       </div>
+      <div style="position: absolute;top: 84px;left: 30px;font-size: 10px">
+        <span><el-link style="font-size: 10px;margin-bottom: 5px;margin-right: 5px" @click="toHome">首页</el-link>请输入帐号密码登录，没有帐号？<el-link style="font-size: 10px;margin-bottom: 5px" @click="toRegister">去注册</el-link></span>
+      </div>
       <!--登录表单区-->
       <el-form ref="longinFromRef" :model="loginForm" :rules="loginFormRules" label-width="0px" class="login_form">
         <!--用户名-->
@@ -71,6 +74,12 @@ export default {
         window.sessionStorage.setItem('user', JSON.stringify(res.data[1]))
         await this.$router.push('/')
       })
+    },
+    toRegister () {
+      this.$router.push('/register')
+    },
+    toHome () {
+      this.$router.push('/')
     }
   }
 }
