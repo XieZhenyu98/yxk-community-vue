@@ -5,45 +5,9 @@
     </div>
     <div class="text item">
       <el-row :gutter="12">
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-      </el-row>
-      <el-row :gutter="12">
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-      </el-row>
-      <el-row :gutter="12">
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
-        </el-col>
-        <el-col :span="8">
-          <el-row><img src="../../assets/user.jpg" width="100%"/></el-row>
-          <el-row style="font-size: 10px">闲心<br/>活跃度：30</el-row>
+        <el-col :key="item.id" :span="8" v-for="item in userListByEx">
+          <el-row><img :src="baseUrl+item.image" width="100%"/></el-row>
+          <el-row style="font-size: 10px">{{ item.username }}<br/>活跃度：{{ item.experience }}</el-row>
         </el-col>
       </el-row>
     </div>
@@ -52,7 +16,18 @@
 
 <script>
 export default {
-  name: 'Ranking'
+  name: 'Ranking',
+  data () {
+    return {
+      baseUrl: '',
+      userListByEx: []
+    }
+  },
+  async created () {
+    this.baseUrl = this.$http.defaults.baseURL
+    const { data: res } = (await this.$http.get('user/userListByEx'))
+    this.userListByEx = res.data.records
+  }
 }
 </script>
 
