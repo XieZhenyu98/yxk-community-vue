@@ -12,7 +12,7 @@
         <el-col :span="3"><span style="background-color: orange; border-radius: 3px;color: #EBEEF5">VIP{{dyItem.userVo.level}}</span></el-col>
         <el-col :span="5">{{ dyItem.time.split(" ")[0] }}</el-col>
         <el-col :span="3"><i class="el-icon-sugar"></i> {{ dyItem.money }}</el-col>
-        <el-col :span="3" :offset="7"><span><i class="el-icon-chat-dot-round"></i> {{ dyItem.times }}</span></el-col>
+        <el-col :span="3" :offset="7"><span><i class="el-icon-chat-dot-round"></i> {{ dyItem.replyNum }}</span></el-col>
       </el-row>
     </el-col>
   </el-row>
