@@ -9,12 +9,12 @@
         <!-- 登录与注册、用户名 -->
         <el-col :span="8" :offset="4" style="padding-top: 12px;display:table-cell;">
           <!-- user不存在显示 -->
-<!--          <el-link :underline="false" @click="toLogin"><span style="font-size: 18px;"><i class="el-icon-user-solid"></i>登录</span></el-link>-->
-<!--          <el-link :underline="false"><span style="font-size: 18px;margin-left: 20px;">注册</span></el-link>-->
+          <el-link v-if="!isLogin" :underline="false" @click="toLogin" style="margin-top: 6px"><span style="font-size: 18px;"><i class="el-icon-user-solid"></i>登录</span></el-link>
+          <el-link v-if="!isLogin" :underline="false" style="margin-top: 6px"><span style="font-size: 18px;margin-left: 20px;">注册</span></el-link>
           <!-- user存在显示 -->
-          <img height="40px" :src="this.$http.defaults.baseURL+userInfo.image">
-          <span style="color: #EBEEF5;margin-left: 10px;margin-bottom: 10px;position: relative;bottom: 12px">欢迎您：{{userInfo.username}}</span>
-          <el-button size="small" type="primary" style="position: relative;bottom: 14px;margin-left: 10px" @click="logOut">退出登录</el-button>
+          <img height="40px" v-if="isLogin" :src="this.$http.defaults.baseURL+userInfo.image">
+          <span v-if="isLogin" style="color: #EBEEF5;margin-left: 10px;margin-bottom: 10px;position: relative;bottom: 12px">欢迎您：{{userInfo.username}}</span>
+          <el-button v-if="isLogin" size="small" type="primary" style="position: relative;bottom: 14px;margin-left: 10px" @click="logOut">退出登录</el-button>
         </el-col>
       </el-row>
     </el-col>
@@ -26,10 +26,16 @@ export default {
   name: 'Header',
   created () {
     this.userInfo = JSON.parse(window.sessionStorage.getItem('user'))
+    if (this.userInfo === null) {
+      this.isLogin = false
+    } else {
+      this.isLogin = true
+    }
   },
   data () {
     return {
-      userInfo: {}
+      userInfo: {},
+      isLogin: false
     }
   },
   methods: {
