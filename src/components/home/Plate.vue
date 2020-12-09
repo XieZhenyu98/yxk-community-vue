@@ -30,8 +30,9 @@ export default {
     return {
       activeIndex: 'all',
       menuList: [],
-      module_id: 111111111111111,
-      contentList: []
+      module_id: 11111,
+      contentList: [],
+      loading: true
     }
   },
   methods: {
@@ -46,10 +47,12 @@ export default {
     }
   },
   async created () {
+    this.loading = true
     const { data: res } = (await this.$http.get('fatherModule/select/0/10'))
     const { data: resPate } = (await this.$http.get('content/0/10'))
     this.contentList = resPate.data.records
     this.menuList = res.data.records
+    this.loading = false
   }
 }
 </script>

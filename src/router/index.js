@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Publish from '@/views/Publish'
+import Detail from '@/views/Detail'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/publish',
     name: 'publish',
     component: Publish
+  },
+  {
+    path: '/detail',
+    name: 'detail',
+    component: Detail
   }
 ]
 

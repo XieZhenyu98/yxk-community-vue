@@ -64,8 +64,8 @@ export default {
     return {}
   },
   components: {
-    HeaderNext,
     Header,
+    HeaderNext,
     Plate,
     WarmChannle,
     Registration,

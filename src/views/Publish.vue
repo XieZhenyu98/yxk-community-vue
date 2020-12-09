@@ -7,6 +7,8 @@
     <!-- 主体 -->
     <el-main>
       <el-row style="width: 100%">
+        <!-- 第一行 -->
+        <HeaderNext></HeaderNext>
         <el-col :span="18" :offset="3">
           <el-card style="width: 100%;margin-top: 10px" align="left">
             <span>发表新帖</span>
@@ -100,6 +102,7 @@
 import VueShowdown from 'vue-showdown'
 import Header from '@/components/home/Header'
 import Vue from 'vue'
+import HeaderNext from '@/components/home/HeaderNext'
 
 Vue.use(VueShowdown, {
   flavor: 'github',
@@ -108,7 +111,7 @@ Vue.use(VueShowdown, {
   }
 })
 export default {
-  components: { Header },
+  components: { Header, HeaderNext },
   async created () {
     const { data: res } = (await this.$http.get('fatherModule/select/0/10'))
     this.selectList = res.data.records
@@ -139,7 +142,6 @@ export default {
   },
   methods: {
     convert () {
-      console.log(this.toFrom.moduleId)
     },
     publish () {
       this.$refs.toFromRef.validate(async valid => {
@@ -154,6 +156,10 @@ export default {
         //   1.1 项目中出了登录之外的其它API接口，必须是在登录之后才能访问
         //   1.2 token 只应在当前网站打开期间生效，所以将 token 保存在 sessionStorage中
         // 2. 通过编程式导航跳转到后台主页，路由地址是 /home
+        console.log(res)
+        await this.$router.push({
+          path: '/detail', query: { contentId: res.data.id }
+        })
       })
     }
   }

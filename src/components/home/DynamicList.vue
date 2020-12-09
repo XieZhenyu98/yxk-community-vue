@@ -5,7 +5,7 @@
     </el-col>
     <el-col :span="21" class="margin-bottom-col">
       <el-row :gutter="2" align="bottom">
-        <el-col :span="24"><span><el-tag size="small" style="margin-right: 10px;margin-left: 5px">{{ dyItem.sonModule.moduleName }}</el-tag>{{dyItem.title}}</span></el-col>
+        <el-col :span="24"><span><el-tag size="small" style="margin-right: 10px;margin-left: 5px">{{ dyItem.sonModule.moduleName }}</el-tag><el-link @click="toDetail">{{dyItem.title}}</el-link></span></el-col>
       </el-row>
       <el-row :gutter="2" align="bottom">
         <el-col :span="3">{{dyItem.userVo.username}}</el-col>
@@ -21,7 +21,15 @@
 <script>
 export default {
   name: 'DynamicList',
-  props: ['dyItem']
+  props: ['dyItem'],
+  methods: {
+    async toDetail () {
+      // await this.$router.push('/detail/' + this.dyItem.id)
+      await this.$router.push({
+        path: '/detail', query: { contentId: this.dyItem.id }
+      })
+    }
+  }
 }
 </script>
 
