@@ -1,0 +1,14 @@
+code {
+    background-color: #B3B3B2;
+    border-radius: 3px;
+}
+blockquote {
+    background-color: #2b4b6b;
+    color: #EBEEF5;
+    border-radius: 3px;
+    padding: 1px;
+    word-break: break-all;
+}
+pre {
+    background-color: #cccccc;
+}

@@ -1,14 +1,23 @@
 import Vue from 'vue'
 import App from './App.vue'
+
+// 导入路由
 import router from './router/index'
+
+// element组件库
 import './plugins/element.js'
 import 'element-ui/lib/theme-chalk/display.css'
+import { isEmpty } from 'element-ui/src/utils/util'
+
 // 添加图标
 import './assets/fonts/iconfont.css'
+
 // 导入全局样式表
 import './assets/css/global.css'
+import './assets/css/markdowm.css'
+
+// 导入对axios的支持
 import axios from 'axios'
-import { isEmpty } from 'element-ui/src/utils/util'
 
 // 配置请求的根路径
 axios.defaults.baseURL = 'http://127.0.0.1:8888'

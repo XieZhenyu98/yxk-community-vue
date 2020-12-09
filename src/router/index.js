@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
+import Publish from '@/views/Publish'
 
 Vue.use(VueRouter)
 
@@ -19,8 +20,13 @@ const routes = [
   },
   {
     path: '/register',
-    name: 'login',
+    name: 'register',
     component: Register
+  },
+  {
+    path: '/publish',
+    name: 'publish',
+    component: Publish
   }
 ]
 
