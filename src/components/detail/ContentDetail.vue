@@ -22,12 +22,12 @@
             </el-tooltip>
           </el-col>
           <el-col :span="6" align="right" style="padding-top: 10px">
-          <span>
-            <i class="el-icon-chat-dot-round"></i>
-            {{ contentDetail.replyNum }}
-            <i class="el-icon-view"></i>
-            {{ contentDetail.times }}
-          </span>
+            <span>
+              <i class="el-icon-chat-dot-round"></i>
+              {{ contentDetail.replyNum }}
+              <i class="el-icon-view"></i>
+              {{ contentDetail.times }}
+            </span>
           </el-col>
         </el-row>
         <el-row style="margin-top: 20px">

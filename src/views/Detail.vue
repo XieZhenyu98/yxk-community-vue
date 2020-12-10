@@ -11,7 +11,12 @@
         <HeaderNext></HeaderNext>
         <el-row :gutter="20">
           <el-col :span="12" :offset="3">
-            <ContentDetail :contentId="contentId"></ContentDetail>
+            <el-row>
+              <ContentDetail :contentId="contentId"></ContentDetail>
+            </el-row>
+            <el-row>
+              <Reply></Reply>
+            </el-row>
           </el-col>
           <el-col :span="6">
             <!-- 热议 -->
@@ -21,6 +26,10 @@
             <!-- 广告 -->
             <el-row>
               <Advertisement></Advertisement>
+            </el-row>
+            <!-- 公众号 -->
+            <el-row>
+              <WeChat></WeChat>
             </el-row>
           </el-col>
         </el-row>
@@ -37,10 +46,14 @@ import Hot from '@/components/home/Hot'
 import Advertisement from '@/components/home/Advertisement'
 import ContentDetail from '@/components/detail/ContentDetail'
 import VueShowdown from 'vue-showdown'
+import Reply from '@/components/detail/Reply'
+import WeChat from '@/components/detail/WeChat'
 Vue.use(VueShowdown)
 export default {
   name: 'Detail',
   components: {
+    WeChat,
+    Reply,
     ContentDetail,
     Advertisement,
     Hot,
