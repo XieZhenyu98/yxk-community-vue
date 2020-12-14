@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 import {
   Button, Main, Container, Footer, Header, Row, Col, Card, Table, TableColumn, Tag, Menu, Submenu, MenuItem, Calendar,
-  Link, Form, FormItem, Input, Message, Radio, RadioGroup, Select, Option, OptionGroup, Tooltip, Loading, Divider
+  Link, Form, FormItem, Input, Message, Radio, RadioGroup, Select, Option, OptionGroup, Tooltip, Loading, Divider, MessageBox
 } from 'element-ui'
 
 Vue.use(Button)
@@ -33,3 +33,4 @@ Vue.use(Tooltip)
 Vue.use(Divider)
 Vue.use(Loading)
 Vue.prototype.$message = Message
+Vue.prototype.$msgbox = MessageBox

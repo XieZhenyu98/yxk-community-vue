@@ -33,7 +33,7 @@ export default {
   data () {
     return {
       loginForm: {
-        email: '751811152@163.com',
+        email: '751811152@222.com',
         password: 'xiaoxiang'
       },
       // 表单验证规则对象

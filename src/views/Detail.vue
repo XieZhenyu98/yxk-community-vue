@@ -15,7 +15,7 @@
               <ContentDetail :contentId="contentId"></ContentDetail>
             </el-row>
             <el-row>
-              <Reply></Reply>
+              <Reply :contentUserId="contentUserId"></Reply>
             </el-row>
           </el-col>
           <el-col :span="6">
@@ -62,7 +62,8 @@ export default {
   },
   data () {
     return {
-      contentId: 1
+      contentId: 1,
+      contentUserId: 1
     }
   }
 }

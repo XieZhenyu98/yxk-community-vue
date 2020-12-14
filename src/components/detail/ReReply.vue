@@ -1,47 +1,41 @@
 <template>
-  <el-card class="box-card" align="left">
-    <el-divider><h1>回帖</h1></el-divider>
-    <div :key="item.id" v-for="(item, index) in getReply">
-      <el-row :gutter="10">
-        <el-col :span="2">
-          <img :src="'http://127.0.0.1:8888'+item.userVo.image" width="100%">
-        </el-col>
-        <el-col :span="22">
-          <el-row style="margin-top: 3px">
-            <el-link style="margin-right: 10px;font-size: 15px">{{ item.userVo.username }}</el-link>
-            <span style="background-color: red; border-radius: 3px;color: #EBEEF5;margin-right: 20px">VIP{{ item.userVo.level }}</span>
-            <span style="">(楼主)</span>
-          </el-row>
-          <el-row style="margin-top: 3px;margin-top: 10px">
-            <el-col>
-              <span style="">{{ item.time }}</span>
-            </el-col>
-          </el-row>
-        </el-col>
-      </el-row>
-      <el-row style="margin-top: 10px">{{ item.content }}</el-row>
-      <!-- 评论内容 -->
-      <ReReply :replyItem="item"></ReReply>
-      <el-row>
-        <el-col align="right">
-          <el-link @click="doSupportFun(item.id,index)" style="font-size: 16px;margin-top: 16px;margin-right: 16px" type="primary">鼓励 <i class="el-icon-ice-tea"></i><span>({{ supportNum[index] }})</span></el-link>
-          <el-link @click="open(item.id)" style="font-size: 16px;margin-top: 16px" type="primary">说一句 <i class="el-icon-chat-dot-round"></i></el-link>
-        </el-col>
-      </el-row>
-      <el-divider></el-divider>
-    </div>
-
-  </el-card>
+<el-row style="background-color: #F8F8F8;width:36%;border-radius: 3px">
+  <el-row style="margin-top: 10px;" :key="item.id" v-for="(item,index) in this.reply">
+    <el-row>
+      <el-col>
+        <el-link :underline="true" type="primary" style="font-size: 16px">{{ item.userVo.username }}</el-link>
+        <span v-if="item.replyVo != null">回复
+          <el-link :underline="true" type="primary" style="font-size: 16px">{{ item.replyVo.userVo.username }}</el-link>
+        </span>
+        ：
+        {{ item.content }}
+      </el-col>
+    </el-row>
+    <el-row>
+      <el-col align="right">
+        <span style="font-size: 14px;margin-right: 12px">2020-12-12 12:12:12</span>
+        <el-link @click="doSupportFun(item.id,index)" :underline="true" type="primary" style="font-size: 20px;margin-right: 12px"><i class="el-icon-ice-tea"></i><span style="font-size: 16px;">({{ supportNum[index] }})</span></el-link>
+        <el-link @click="open(item.fatherReplyId,item.id)" :underline="true" type="primary" style="font-size: 20px;margin-right: 6px"><i class="el-icon-chat-dot-round"></i></el-link>
+      </el-col>
+    </el-row>
+  </el-row>
+</el-row>
 </template>
 
 <script>
-import ReReply from '@/components/detail/ReReply'
 export default {
-  name: 'Reply',
-  components: { ReReply },
-  props: ['contentUserId'],
+  name: 'ReReply',
+  props: ['replyItem'],
+  async created () {
+    const { data: res } = (await this.$http.get('reply/list/re/' + this.replyItem.contentId + '/' + this.replyItem.id + '/0/10'))
+    for (const item in res.data.records) {
+      this.supportNum[item] = (await this.$http.get('support/reply/count/' + res.data.records[item].id)).data.data
+    }
+    this.reply = res.data.records
+  },
   data () {
     return {
+      reply: [],
       doReply: {
         contentId: this.$route.query.contentId,
         quoteId: null,
@@ -49,17 +43,16 @@ export default {
         userId: -1,
         fatherReplyId: null
       },
-      getReply: [],
+      support: 0,
       supportNum: [],
-      supportNumBo: [],
       doSupport: {
-        userId: null,
-        replyId: null
+        replyId: null,
+        userId: null
       }
     }
   },
   methods: {
-    open (value) {
+    open (value, value2) {
       const _this = this
       const h = _this.$createElement
       _this.$msgbox({
@@ -88,8 +81,9 @@ export default {
             if (JSON.parse(window.sessionStorage.getItem('user')) === null) {
               this.$message.error('请先登录再评论')
             } else {
-              this.doReply.userId = this.doReply.userId = JSON.parse(window.sessionStorage.getItem('user')).id
+              this.doReply.userId = JSON.parse(window.sessionStorage.getItem('user')).id
               this.doReply.fatherReplyId = value
+              this.doReply.quoteId = value2
               instance.confirmButtonLoading = true
               instance.confirmButtonText = '评论中...'
               this.doReply.content = _this.commentContent
@@ -107,9 +101,8 @@ export default {
     },
     async doReplyFunc () {
       await this.$http.post('reply/add', this.doReply)
-      const { data: res } = (await this.$http.get('reply/list/' + this.doReply.contentId + '/' + '0/10'))
-      this.getReply = res.data.records
-      this.$router.go(0)
+      const { data: res } = (await this.$http.get('reply/list/re/' + this.replyItem.contentId + '/' + this.replyItem.id + '/0/10'))
+      this.reply = res.data.records
     },
     onCommentInputChange () {
       this.commentContent = document.getElementById('commentContent').value
@@ -127,14 +120,6 @@ export default {
       }
       this.$forceUpdate()
     }
-  },
-  async created () {
-    const { data: res } = (await this.$http.get('reply/list/' + this.doReply.contentId + '/' + '0/10'))
-    // eslint-disable-next-line no-unused-vars
-    for (const item in res.data.records) {
-      this.supportNum[item] = (await this.$http.get('support/reply/count/' + res.data.records[item].id)).data.data
-    }
-    this.getReply = res.data.records
   }
 }
 </script>
