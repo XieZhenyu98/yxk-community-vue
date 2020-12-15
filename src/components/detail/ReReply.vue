@@ -13,7 +13,7 @@
     </el-row>
     <el-row>
       <el-col align="right">
-        <span style="font-size: 14px;margin-right: 12px">2020-12-12 12:12:12</span>
+        <span style="font-size: 14px;margin-right: 12px">{{ item.time }}</span>
         <el-link @click="doSupportFun(item.id,index)" :underline="true" type="primary" style="font-size: 20px;margin-right: 12px"><i class="el-icon-ice-tea"></i><span style="font-size: 16px;">({{ supportNum[index] }})</span></el-link>
         <el-link @click="open(item.fatherReplyId,item.id)" :underline="true" type="primary" style="font-size: 20px;margin-right: 6px"><i class="el-icon-chat-dot-round"></i></el-link>
       </el-col>
@@ -44,7 +44,7 @@ export default {
         fatherReplyId: null
       },
       support: 0,
-      supportNum: [],
+      supportNum: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       doSupport: {
         replyId: null,
         userId: null

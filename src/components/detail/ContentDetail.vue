@@ -56,6 +56,16 @@
     <div>
       <VueShowdown :markdown="content" flavor="github" :options="{ emoji: true }"></VueShowdown>
     </div>
+    <el-row>
+      <el-col align="center" style="font-size: 36px">
+        <a href="#" @click.prevent="doSupportFun()"><i class="el-icon-thumb"></i><span style="font-size: 26px">({{ supportNum }})</span></a>
+        <a href="#" style="margin-left: 16px;margin-right: 16px;"><i class="el-icon-star-off"></i><span style="font-size: 26px">(0)</span></a>
+        <a href="#"><i class="el-icon-share"></i><span style="font-size: 26px">(0)</span></a>
+      </el-col>
+      <el-col align="right" style="font-size: 26px">
+        <a href="#" @click.prevent="open()"><i class="el-icon-chat-dot-round"></i><span style="font-size: 16px">说一句</span></a>
+      </el-col>
+    </el-row>
   </el-card>
 </template>
 
@@ -77,7 +87,17 @@ export default {
       sonModuleV: {},
       content: '',
       userVo: '',
-      time: ''
+      time: '',
+      doReply: {
+        contentId: this.$route.query.contentId,
+        content: null,
+        userId: 1
+      },
+      doSupport: {
+        contentId: this.$route.query.contentId,
+        userId: 1
+      },
+      supportNum: 0
     }
   },
   async created () {
@@ -87,6 +107,73 @@ export default {
     this.content = res.data.content
     this.userVo = res.data.userVo
     this.time = res.data.time.split(' ')[0]
+    this.supportNum = (await this.$http.get('support/content/count/' + this.doSupport.contentId)).data.data
+  },
+  methods: {
+    open () {
+      const _this = this
+      const h = _this.$createElement
+      _this.$msgbox({
+        title: '说一句',
+        message: h('div', {
+          attrs: {
+            class: 'el-textarea'
+          }
+        }, [
+          h('textarea', {
+            attrs: {
+              class: 'el-textarea__inner',
+              autocomplete: 'off',
+              rows: 4,
+              id: 'commentContent'
+            },
+            value: _this.commentContent,
+            on: { input: _this.onCommentInputChange }
+          })
+        ]),
+        showCancelButton: true,
+        confirmButtonText: '评论',
+        cancelButtonText: '取消',
+        beforeClose: (action, instance, done) => {
+          if (action === 'confirm') {
+            if (JSON.parse(window.sessionStorage.getItem('user')) === null) {
+              this.$message.error('请先登录再评论')
+            } else {
+              this.doReply.userId = JSON.parse(window.sessionStorage.getItem('user')).id
+              instance.confirmButtonLoading = true
+              instance.confirmButtonText = '评论中...'
+              this.doReply.content = _this.commentContent
+              this.doReplyFunc()
+              instance.confirmButtonLoading = false
+              this.$message.success('评论成功')
+            }
+            done()
+          } else {
+            done()
+          }
+        }
+      }).then(action => {
+      })
+    },
+    async doReplyFunc () {
+      await this.$http.post('reply/add', this.doReply)
+      this.$router.go(0)
+    },
+    onCommentInputChange () {
+      this.commentContent = document.getElementById('commentContent').value
+    },
+    async doSupportFun () {
+      this.doSupport.userId = JSON.parse(window.sessionStorage.getItem('user')).id
+      const { data: res } = await this.$http.put('support/content', this.doSupport)
+      if (res.data === 0) {
+        this.supportNum = this.supportNum - 1
+        this.$message.error('取消鼓励!')
+      } else {
+        this.supportNum = this.supportNum + 1
+        this.$message.success('鼓励成功！')
+      }
+      this.$forceUpdate()
+    }
   }
 }
 </script>
