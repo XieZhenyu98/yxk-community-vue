@@ -5,6 +5,7 @@ import Login from '@/views/Login'
 import Register from '@/views/Register'
 import Publish from '@/views/Publish'
 import Detail from '@/views/Detail'
+import Personal from '@/views/Personal'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/detail',
     name: 'detail',
     component: Detail
+  },
+  {
+    path: '/personal',
+    name: 'personal',
+    component: Personal
   }
 ]
 

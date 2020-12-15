@@ -3,9 +3,9 @@
   <el-row style="margin-top: 10px;" :key="item.id" v-for="(item,index) in this.reply">
     <el-row>
       <el-col>
-        <el-link :underline="true" type="primary" style="font-size: 16px">{{ item.userVo.username }}</el-link>
+        <el-link @click.prevent="toPersonal(item.userVo.id)" :underline="true" type="primary" style="font-size: 16px">{{ item.userVo.username }}</el-link>
         <span v-if="item.replyVo != null">回复
-          <el-link :underline="true" type="primary" style="font-size: 16px">{{ item.replyVo.userVo.username }}</el-link>
+          <el-link @click.prevent="toPersonal(item.replyVo.userVo.id)" :underline="true" type="primary" style="font-size: 16px">{{ item.replyVo.userVo.username }}</el-link>
         </span>
         ：
         {{ item.content }}
@@ -119,6 +119,9 @@ export default {
         this.$message.success('鼓励成功！')
       }
       this.$forceUpdate()
+    },
+    toPersonal (value) {
+      this.$router.push('/personal?userId=' + value)
     }
   }
 }

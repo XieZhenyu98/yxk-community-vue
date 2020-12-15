@@ -6,8 +6,8 @@
     <div class="text item">
       <el-row :gutter="12">
         <el-col :key="item.id" :span="8" v-for="item in userListByEx">
-          <el-row><img :src="baseUrl+item.image" width="100%"/></el-row>
-          <el-row style="font-size: 10px">{{ item.username }}<br/>活跃度：{{ item.experience }}</el-row>
+          <el-row><a @click.prevent="toPersonal(item.id)" href="#"><img :src="baseUrl+item.image" width="100%"/></a></el-row>
+          <el-row style="font-size: 10px"><a @click.prevent="toPersonal(item.id)" href="#">{{ item.username }}</a><br/>活跃度：{{ item.experience }}</el-row>
         </el-col>
       </el-row>
     </div>
@@ -27,6 +27,11 @@ export default {
     this.baseUrl = this.$http.defaults.baseURL
     const { data: res } = (await this.$http.get('user/userListByEx'))
     this.userListByEx = res.data.records
+  },
+  methods: {
+    toPersonal (value) {
+      this.$router.push('/personal?userId=' + value)
+    }
   }
 }
 </script>

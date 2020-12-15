@@ -4,11 +4,11 @@
     <div :key="item.id" v-for="(item, index) in getReply">
       <el-row :gutter="10">
         <el-col :span="2">
-          <img :src="'http://127.0.0.1:8888'+item.userVo.image" width="100%">
+          <a href="#" @click.prevent="toPersonal(item.userVo.id)"><img :src="'http://127.0.0.1:8888'+item.userVo.image" width="100%"></a>
         </el-col>
         <el-col :span="22">
           <el-row style="margin-top: 3px">
-            <el-link style="margin-right: 10px;font-size: 15px">{{ item.userVo.username }}</el-link>
+            <el-link style="margin-right: 10px;font-size: 15px"><a href="#" @click.prevent="toPersonal(item.userVo.id)">{{ item.userVo.username }}</a></el-link>
             <span style="background-color: red; border-radius: 3px;color: #EBEEF5;margin-right: 20px">VIP{{ item.userVo.level }}</span>
             <span style="">(楼主)</span>
           </el-row>
@@ -126,6 +126,9 @@ export default {
         this.$message.success('鼓励成功！')
       }
       this.$forceUpdate()
+    },
+    toPersonal (value) {
+      this.$router.push('/personal?userId=' + value)
     }
   },
   async created () {

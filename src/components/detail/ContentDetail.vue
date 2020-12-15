@@ -34,17 +34,17 @@
           <div style="background-color: #F8F8F8;padding: 10px;">
             <el-row :gutter="10">
               <el-col :span="2">
-                <img :src="this.$http.defaults.baseURL+userVo.image" width="100%">
+                <a href="#" @click.prevent="toPersonal(userVo.id)"><img :src="this.$http.defaults.baseURL+userVo.image" width="100%"></a>
               </el-col>
               <el-col :span="22">
                 <el-row style="margin-top: 3px">
-                  <el-link style="margin-right: 10px;font-size: 15px">{{ userVo.username }}</el-link>
+                  <el-link style="margin-right: 10px;font-size: 15px"><a href="#" @click.prevent="toPersonal(userVo.id)">{{ userVo.username }}</a></el-link>
                   <span style="background-color: red; border-radius: 3px;color: #EBEEF5">VIP{{ userVo.level }}</span>
                   <span style="margin-left: 20px">{{ time.split(" ")[0] }}</span>
                 </el-row>
                 <el-row style="margin-top: 3px">
                   <el-col>
-                    <span style="color: orange;font-size: 12px">悬赏：12飞吻</span>
+                    <span style="color: orange;font-size: 12px">悬赏：{{ contentDetail.money }}飞吻</span>
                   </el-col>
                 </el-row>
               </el-col>
@@ -57,7 +57,7 @@
       <VueShowdown :markdown="content" flavor="github" :options="{ emoji: true }"></VueShowdown>
     </div>
     <el-row>
-      <el-col align="center" style="font-size: 36px">
+      <el-col align="center" style="font-size: 26px">
         <a href="#" @click.prevent="doSupportFun()"><i class="el-icon-thumb"></i><span style="font-size: 26px">({{ supportNum }})</span></a>
         <a href="#" style="margin-left: 16px;margin-right: 16px;"><i class="el-icon-star-off"></i><span style="font-size: 26px">(0)</span></a>
         <a href="#"><i class="el-icon-share"></i><span style="font-size: 26px">(0)</span></a>
@@ -173,6 +173,9 @@ export default {
         this.$message.success('鼓励成功！')
       }
       this.$forceUpdate()
+    },
+    toPersonal (value) {
+      this.$router.push('/personal?userId=' + value)
     }
   }
 }

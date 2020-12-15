@@ -1,14 +1,14 @@
 <template>
   <el-row :gutter="6">
     <el-col :span="3">
-      <img :src="this.$http.defaults.baseURL+dyItem.userVo.image" width="100%">
+      <a href="#" @click.prevent="toPersonal(dyItem.userVo.id)"><img :src="this.$http.defaults.baseURL+dyItem.userVo.image" width="100%"></a>
     </el-col>
     <el-col :span="21" class="margin-bottom-col">
       <el-row :gutter="2" align="bottom">
         <el-col :span="24"><span><el-tag size="small" style="margin-right: 10px;margin-left: 5px">{{ dyItem.sonModule.moduleName }}</el-tag><el-link @click="toDetail">{{dyItem.title}}</el-link></span></el-col>
       </el-row>
       <el-row :gutter="2" align="bottom">
-        <el-col :span="3">{{dyItem.userVo.username}}</el-col>
+        <el-col :span="3"><a href="#" @click.prevent="toPersonal(dyItem.userVo.id)" style="text-underline: #EBEEF5">{{dyItem.userVo.username}}</a></el-col>
         <el-col :span="3"><span style="background-color: orange; border-radius: 3px;color: #EBEEF5">VIP{{dyItem.userVo.level}}</span></el-col>
         <el-col :span="5">{{ dyItem.time.split(" ")[0] }}</el-col>
         <el-col :span="3"><i class="el-icon-sugar"></i> {{ dyItem.money }}</el-col>
@@ -28,6 +28,9 @@ export default {
       await this.$router.push({
         path: '/detail', query: { contentId: this.dyItem.id }
       })
+    },
+    toPersonal (value) {
+      this.$router.push('/personal?userId=' + value)
     }
   }
 }
@@ -45,4 +48,5 @@ export default {
     }
   }
 }
+
 </style>
