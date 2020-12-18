@@ -12,9 +12,26 @@
           <el-link v-if="!isLogin" :underline="false" @click="toLogin" style="margin-top: 6px"><span style="font-size: 18px;"><i class="el-icon-user-solid"></i>登录</span></el-link>
           <el-link v-if="!isLogin" :underline="false" @click="toRegister" style="margin-top: 6px"><span style="font-size: 18px;margin-left: 20px;">注册</span></el-link>
           <!-- user存在显示 -->
-          <img height="40px" v-if="isLogin" :src="this.$http.defaults.baseURL+userInfo.image">
-          <span v-if="isLogin" style="color: #EBEEF5;margin-left: 10px;margin-bottom: 10px;position: relative;bottom: 12px">欢迎您：{{userInfo.username}}</span>
-          <el-button v-if="isLogin" size="small" type="primary" style="position: relative;bottom: 14px;margin-left: 10px" @click="logOut">退出登录</el-button>
+          <el-dropdown>
+            <div>
+              <img height="40px" v-if="isLogin" :src="this.$http.defaults.baseURL+userInfo.image">
+              <span v-if="isLogin" style="color: #EBEEF5;margin-left: 10px;margin-bottom: 10px;position: relative;bottom: 12px">欢迎您：{{userInfo.username}}</span>
+            </div>
+            <el-dropdown-menu>
+              <el-dropdown-item icon="el-icon-setting">
+                基本设置
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-message-solid">
+                我的消息
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-house">
+                <span @click="toPersonal(userInfo.id)">我的主页</span>
+              </el-dropdown-item>
+              <el-dropdown-item v-if="isLogin" divided icon="el-icon-warning">
+                <span @click="logOut()">退出登录</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
         </el-col>
       </el-row>
     </el-col>
@@ -49,6 +66,9 @@ export default {
     },
     toRegister () {
       this.$router.push('/register')
+    },
+    toPersonal (value) {
+      this.$router.push('/personal?userId=' + value)
     }
   }
 }
