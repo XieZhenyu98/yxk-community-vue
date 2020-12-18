@@ -36,14 +36,14 @@ export default {
     return {
       baseUrl: '',
       userId: this.$route.query.userId,
-      user: {}
+      user: {
+      }
     }
   },
   async created () {
     this.baseUrl = this.$http.defaults.baseURL
     const { data: res } = (await this.$http.get('user/' + this.userId))
     this.user = res.data
-    console.log(this.user)
   }
 }
 </script>

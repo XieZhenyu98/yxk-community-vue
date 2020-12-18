@@ -15,8 +15,12 @@
             <PersonalCard></PersonalCard>
           </el-col>
         </el-row>
+        <el-row :gutter="20">
+          <el-col :span="9" :offset="3"><RecentQuestions></RecentQuestions></el-col>
+          <el-col :span="9"><RecentAnswers></RecentAnswers></el-col>
+        </el-row>
+        <Foot></Foot>
       </el-row>
-
     </el-main>
   </el-container>
 </template>
@@ -25,9 +29,15 @@
 import Header from '@/components/home/Header'
 import HeaderNext from '@/components/home/HeaderNext'
 import PersonalCard from '@/components/personal/PersonalCard'
+import RecentQuestions from '@/components/personal/RecentQuestions'
+import RecentAnswers from '@/components/personal/RecentAnswers'
+import Foot from '@/components/home/Foot'
 export default {
   name: 'Personal',
   components: {
+    Foot,
+    RecentAnswers,
+    RecentQuestions,
     PersonalCard,
     HeaderNext,
     Header
