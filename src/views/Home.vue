@@ -35,13 +35,7 @@
           </el-col>
         </el-row>
         <!-- 第三行底部 -->
-        <el-row class="bottom-row">
-          <el-col :span="18" :offset="3">
-            <hr style=" height:2px;border:none;border-top:1px solid #B3B3B2;" />
-            <span>Powered by 谢振瑜 ©2019 xiezhenyu98.com</span><br/>
-            <span>桂ICP备19003999号   邮箱: 751811152@qq.com</span>
-          </el-col>
-        </el-row>
+        <Foot></Foot>
       </div>
     </el-main>
   </el-container>
@@ -58,12 +52,14 @@ import Advertisement from '@/components/home/Advertisement'
 import Links from '@/components/home/Links'
 import Header from '@/components/home/Header'
 import HeaderNext from '@/components/home/HeaderNext'
+import Foot from '@/components/home/Foot'
 export default {
   name: 'Home',
   data () {
     return {}
   },
   components: {
+    Foot,
     Header,
     HeaderNext,
     Plate,
