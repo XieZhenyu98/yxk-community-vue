@@ -4,7 +4,7 @@
     <div :key="item.id" v-for="(item, index) in getReply">
       <el-row :gutter="10">
         <el-col :span="2">
-          <a href="#" @click.prevent="toPersonal(item.userVo.id)"><img :src="'http://127.0.0.1:8888'+item.userVo.image" width="100%"></a>
+          <a href="#" @click.prevent="toPersonal(item.userVo.id)"><img :src="baseURL+item.userVo.image" width="100%"></a>
         </el-col>
         <el-col :span="22">
           <el-row style="margin-top: 3px">
@@ -55,7 +55,8 @@ export default {
       doSupport: {
         userId: null,
         replyId: null
-      }
+      },
+      baseURL: this.$http.defaults.baseURL
     }
   },
   methods: {
