@@ -33,6 +33,7 @@
             </el-row>
           </el-col>
         </el-row>
+        <Foot></Foot>
       </el-row>
     </el-main>
   </el-container>
@@ -48,10 +49,12 @@ import ContentDetail from '@/components/detail/ContentDetail'
 import VueShowdown from 'vue-showdown'
 import Reply from '@/components/detail/Reply'
 import WeChat from '@/components/detail/WeChat'
+import Foot from '@/components/home/Foot'
 Vue.use(VueShowdown)
 export default {
   name: 'Detail',
   components: {
+    Foot,
     WeChat,
     Reply,
     ContentDetail,

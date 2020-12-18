@@ -94,6 +94,7 @@
             </el-form>
           </el-card>
         </el-col>
+        <Foot></Foot>
       </el-row>
     </el-main>
   </el-container>
@@ -103,6 +104,7 @@ import VueShowdown from 'vue-showdown'
 import Header from '@/components/home/Header'
 import Vue from 'vue'
 import HeaderNext from '@/components/home/HeaderNext'
+import Foot from '@/components/home/Foot'
 
 Vue.use(VueShowdown, {
   flavor: 'github',
@@ -111,7 +113,7 @@ Vue.use(VueShowdown, {
   }
 })
 export default {
-  components: { Header, HeaderNext },
+  components: { Foot, Header, HeaderNext },
   async created () {
     const { data: res } = (await this.$http.get('fatherModule/select/0/10'))
     this.selectList = res.data.records
