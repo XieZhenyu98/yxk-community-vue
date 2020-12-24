@@ -8,8 +8,8 @@
       <span class="span1"><el-link>公告</el-link></span>
       <span class="span1"><el-link>动态</el-link></span>
       <span class="span1" style="font-size: 14px">|</span>
-      <span class="span1"><el-link>我发表的贴</el-link></span>
-      <span class="span1"><el-link>我收藏的贴</el-link></span>
+      <span class="span1"><el-link @click="toUserPublishedList()">我发表的贴</el-link></span>
+      <span class="span1"><el-link @click="toUserCollectionList()">我收藏的贴</el-link></span>
     </el-col>
     <el-col :span="6" style="text-align: right;padding-right: 20px;align-items: center">
       <i class="el-icon-search" style="font-size: 20px;padding-right: 20px;"></i>
@@ -27,6 +27,12 @@ export default {
     },
     toHome () {
       this.$router.push('/')
+    },
+    toUserPublishedList () {
+      this.$router.push('/userEdit/userCenter/userPublishedList')
+    },
+    toUserCollectionList () {
+      this.$router.push('/userEdit/userCenter/userCollectionList')
     }
   }
 }

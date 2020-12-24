@@ -9,91 +9,93 @@
       <el-row style="width: 100%">
         <!-- 第一行 -->
         <HeaderNext></HeaderNext>
-        <el-col :span="18" :offset="3">
-          <el-card style="width: 100%;margin-top: 10px" align="left">
-            <span>发表新帖</span>
-            <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
-            <el-form :model="toFrom" :rules="fromRules" ref="toFromRef">
-              <el-row :gutter="2">
-                <!-- 板块选择 -->
-                <el-col :span="6">
-                  <div>
-                    <el-form-item prop="moduleId">
-                      <el-select v-model="toFrom.moduleId" placeholder="请选择所在板块" @change="convert">
-                        <el-option-group
-                          v-for="group in selectList"
-                          :key="group.id"
-                          :label="group.moduleName">
-                          <el-option
-                            v-for="item in group.sonModuleList"
-                            :key="item.moduleName"
-                            :label="item.moduleName"
-                            :value="item.id">
-                          </el-option>
-                        </el-option-group>
-                      </el-select>
-                    </el-form-item>
-                  </div>
-                </el-col>
-                <!-- 标题 -->
-                <el-col :span="18">
-                  <el-form-item prop="title">
-                    <el-input placeholder="请输入内容" v-model="toFrom.title">
-                      <template slot="prepend">标题</template>
-                    </el-input>
-                  </el-form-item>
-                </el-col>
-              </el-row>
-              <el-row style="margin-top: 10px">
-                <el-row>
-                  <!-- 插入图片等快捷栏框 -->
-                  <div style="background-color: #F5F7FA;border-radius: 3px;border: 1px #DCDFE6 solid;color: #909399;font-size: 14px;height: 31px;">
-                  </div>
-                </el-row>
+        <el-row>
+          <el-col :span="18" :offset="3">
+            <el-card style="width: 100%;margin-top: 10px" align="left">
+              <span>发表新帖</span>
+              <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+              <el-form :model="toFrom" :rules="fromRules" ref="toFromRef">
                 <el-row :gutter="2">
-                  <!-- 内容输入框 -->
-                  <el-col :span="12">
-                    <el-form-item prop="content">
-                      <el-input
-                        id="oriContent"
-                        rows="16"
-                        type="textarea"
-                        placeholder="请输入内容"
-                        v-model="toFrom.content"
-                        maxlength="3000"
-                        show-word-limit
-                        @input="convert"
-                      >
+                  <!-- 板块选择 -->
+                  <el-col :span="6">
+                    <div>
+                      <el-form-item prop="moduleId">
+                        <el-select v-model="toFrom.moduleId" placeholder="请选择所在板块" @change="convert">
+                          <el-option-group
+                            v-for="group in selectList"
+                            :key="group.id"
+                            :label="group.moduleName">
+                            <el-option
+                              v-for="item in group.sonModuleList"
+                              :key="item.moduleName"
+                              :label="item.moduleName"
+                              :value="item.id">
+                            </el-option>
+                          </el-option-group>
+                        </el-select>
+                      </el-form-item>
+                    </div>
+                  </el-col>
+                  <!-- 标题 -->
+                  <el-col :span="18">
+                    <el-form-item prop="title">
+                      <el-input placeholder="请输入内容" v-model="toFrom.title">
+                        <template slot="prepend">标题</template>
                       </el-input>
                     </el-form-item>
                   </el-col>
-                  <!-- 实时解析成markdown框 -->
-                  <el-col :span="12">
-                    <div style="border: 1px #DCDFE6 solid;border-radius: 3px;height: 345px">
-                      <VueShowdown :markdown="toFrom.content" flavor="github" :options="{ emoji: true }"></VueShowdown>
-                    </div>
-                  </el-col>
                 </el-row>
-              </el-row>
-              <!-- 悬赏框 -->
-              <el-row style="margin-top: 5px">
-                <el-input placeholder="请输入悬赏数量" v-model="toFrom.money" style="width: 300px">
-                  <template slot="prepend">悬赏</template>
-                </el-input>
-              </el-row>
-              <!-- 人类验证框 -->
-              <el-row style="margin-top: 5px">
-                <el-input placeholder="请输入答案" style="width: 300px">
-                  <template slot="prepend">验证<span style="margin-left: 10px;color: red">1+1=?</span></template>
-                </el-input>
-              </el-row>
-              <!-- 发布按钮 -->
-              <el-row style="margin-top: 5px">
-                <el-button @click.prevent="publish">立即发布</el-button>
-              </el-row>
-            </el-form>
-          </el-card>
-        </el-col>
+                <el-row style="margin-top: 10px">
+                  <el-row>
+                    <!-- 插入图片等快捷栏框 -->
+                    <div style="background-color: #F5F7FA;border-radius: 3px;border: 1px #DCDFE6 solid;color: #909399;font-size: 14px;height: 31px;">
+                    </div>
+                  </el-row>
+                  <el-row :gutter="2">
+                    <!-- 内容输入框 -->
+                    <el-col :span="12">
+                      <el-form-item prop="content">
+                        <el-input
+                          id="oriContent"
+                          rows="16"
+                          type="textarea"
+                          placeholder="请输入内容"
+                          v-model="toFrom.content"
+                          maxlength="3000"
+                          show-word-limit
+                          @input="convert"
+                        >
+                        </el-input>
+                      </el-form-item>
+                    </el-col>
+                    <!-- 实时解析成markdown框 -->
+                    <el-col :span="12">
+                      <div style="border: 1px #DCDFE6 solid;border-radius: 3px;height: 345px">
+                        <VueShowdown :markdown="toFrom.content" flavor="github" :options="{ emoji: true }"></VueShowdown>
+                      </div>
+                    </el-col>
+                  </el-row>
+                </el-row>
+                <!-- 悬赏框 -->
+                <el-row style="margin-top: 5px">
+                  <el-input placeholder="请输入悬赏数量" v-model="toFrom.money" style="width: 300px">
+                    <template slot="prepend">悬赏</template>
+                  </el-input>
+                </el-row>
+                <!-- 人类验证框 -->
+                <el-row style="margin-top: 5px">
+                  <el-input placeholder="请输入答案" style="width: 300px">
+                    <template slot="prepend">验证<span style="margin-left: 10px;color: red">1+1=?</span></template>
+                  </el-input>
+                </el-row>
+                <!-- 发布按钮 -->
+                <el-row style="margin-top: 5px">
+                  <el-button @click.prevent="publish">立即发布</el-button>
+                </el-row>
+              </el-form>
+            </el-card>
+          </el-col>
+        </el-row>
         <Foot></Foot>
       </el-row>
     </el-main>
@@ -125,7 +127,7 @@ export default {
         moduleId: '',
         title: '',
         content: '',
-        userId: JSON.parse(window.sessionStorage.getItem('user')).id,
+        userId: '',
         money: 12
       },
       value: '',
@@ -146,6 +148,7 @@ export default {
     convert () {
     },
     publish () {
+      this.toFrom.userId = JSON.parse(window.sessionStorage.getItem('user')).id
       this.$refs.toFromRef.validate(async valid => {
         // eslint-disable-next-line no-useless-return
         if (!valid) return

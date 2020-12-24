@@ -1,0 +1,74 @@
+<template>
+  <div align="right">
+  <el-table
+    :data="tableData.filter(data => !search || data.name.toLowerCase().includes(search.toLowerCase()))"
+    style="width: 100%">
+    <el-table-column
+      label="标题"
+      prop="title">
+    </el-table-column>
+    <el-table-column
+      label="日期"
+      prop="time">
+    </el-table-column>
+    <el-table-column
+      label="阅读数"
+      prop="times">
+    </el-table-column>
+    <el-table-column
+      align="right">
+      <template slot-scope="scope">
+        <el-tooltip class="item" effect="dark" content="查看" placement="top">
+          <el-button size="small " @click="handleSearch(scope.row)" icon="el-icon-search" circle></el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="编辑" placement="top">
+        <el-button size="small " @click="handleEdit(scope.$index, scope.row)" type="primary" icon="el-icon-edit" circle></el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="删除" placement="top">
+          <el-button size="small " @click="handleDelete(scope.$index, scope.row)" type="danger" icon="el-icon-delete" circle></el-button>
+        </el-tooltip>
+      </template>
+    </el-table-column>
+  </el-table>
+  <el-pagination
+    background
+    layout="prev, pager, next, total"
+    @current-change="paginationChange"
+    :total="page.total">
+  </el-pagination>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'UserPublishedList',
+  async created () {
+    const { data: res } = (await this.$http.get('/content/select/user/4/0/10'))
+    this.tableData = res.data.records
+    this.page = res.data
+  },
+  data () {
+    return {
+      tableData: [],
+      page: {},
+      search: ''
+    }
+  },
+  methods: {
+    handleSearch (value) {
+      this.$router.push('/detail?contentId=' + value.id)
+    },
+    async paginationChange (page) {
+      const { data: res } = await this.$http.get('/content/select/user/4/' + page + '/10')
+      console.log(res)
+      // console.log('/content/select/user/4/' + ((page - 1) * 10) + '/10')
+      this.tableData = res.data.records
+      this.page = res.data
+    }
+  }
+}
+</script>
+
+<style lang="less" scoped>
+
+</style>

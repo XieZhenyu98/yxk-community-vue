@@ -18,14 +18,14 @@
               <span v-if="isLogin" style="color: #EBEEF5;margin-left: 10px;margin-bottom: 10px;position: relative;bottom: 12px">欢迎您：{{userInfo.username}}</span>
             </div>
             <el-dropdown-menu>
-              <el-dropdown-item icon="el-icon-setting">
-                基本设置
-              </el-dropdown-item>
-              <el-dropdown-item icon="el-icon-message-solid">
-                我的消息
-              </el-dropdown-item>
               <el-dropdown-item icon="el-icon-house">
                 <span @click="toPersonal(userInfo.id)">我的主页</span>
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-message-solid">
+                <span>我的消息</span>
+              </el-dropdown-item>
+              <el-dropdown-item icon="el-icon-setting">
+                <span @click="toUserEdit(userInfo.id)">基本设置</span>
               </el-dropdown-item>
               <el-dropdown-item v-if="isLogin" divided icon="el-icon-warning">
                 <span @click="logOut()">退出登录</span>
@@ -69,6 +69,9 @@ export default {
     },
     toPersonal (value) {
       this.$router.push('/personal?userId=' + value)
+    },
+    toUserEdit () {
+      this.$router.push('/userEdit/basicSetting')
     }
   }
 }

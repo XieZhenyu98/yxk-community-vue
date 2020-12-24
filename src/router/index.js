@@ -6,6 +6,12 @@ import Register from '@/views/Register'
 import Publish from '@/views/Publish'
 import Detail from '@/views/Detail'
 import Personal from '@/views/Personal'
+import UserEdit from '@/views/UserEdit'
+import UserCenter from '@/components/useredit/UserCenter'
+import BasicSettings from '@/components/useredit/BasicSettings'
+import UserMessage from '@/components/useredit/UserMessage'
+import UserPublishedList from '@/components/useredit/usercenter/UserPublishedList'
+import UserCollectionList from '@/components/useredit/usercenter/UserCollectionList'
 
 Vue.use(VueRouter)
 
@@ -39,6 +45,41 @@ const routes = [
     path: '/personal',
     name: 'personal',
     component: Personal
+  },
+  {
+    path: '/userEdit',
+    name: 'userEdit',
+    component: UserEdit,
+    children: [
+      {
+        path: 'userCenter',
+        name: 'userCenter',
+        component: UserCenter,
+        redirect: '/userEdit/userCenter/userPublishedList',
+        children: [
+          {
+            path: 'userPublishedList',
+            name: 'userPublishedList',
+            component: UserPublishedList
+          },
+          {
+            path: 'userCollectionList',
+            name: 'userCollectionList',
+            component: UserCollectionList
+          }
+        ]
+      },
+      {
+        path: 'basicSetting',
+        name: 'basicSetting',
+        component: BasicSettings
+      },
+      {
+        path: 'userMessage',
+        name: 'userMessage',
+        component: UserMessage
+      }
+    ]
   }
 ]
 

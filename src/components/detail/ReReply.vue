@@ -1,5 +1,5 @@
 <template>
-<el-row style="background-color: #F8F8F8;width:36%;border-radius: 3px">
+<el-row style="background-color: #F8F8F8;width:60%;border-radius: 3px">
   <el-row style="margin-top: 10px;" :key="item.id" v-for="(item,index) in this.reply">
     <el-row>
       <el-col>
