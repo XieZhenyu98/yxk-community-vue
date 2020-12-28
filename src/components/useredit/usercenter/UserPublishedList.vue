@@ -43,6 +43,7 @@
 export default {
   name: 'UserPublishedList',
   async created () {
+    this.userInfo = JSON.parse(window.sessionStorage.getItem('user'))
     const { data: res } = (await this.$http.get('/content/select/user/4/0/10'))
     this.tableData = res.data.records
     this.page = res.data
@@ -51,7 +52,8 @@ export default {
     return {
       tableData: [],
       page: {},
-      search: ''
+      search: '',
+      userInfo: {}
     }
   },
   methods: {
@@ -59,7 +61,7 @@ export default {
       this.$router.push('/detail?contentId=' + value.id)
     },
     async paginationChange (page) {
-      const { data: res } = await this.$http.get('/content/select/user/4/' + page + '/10')
+      const { data: res } = await this.$http.get('/content/select/user/' + this.userInfo.id + '/' + page + '/10')
       console.log(res)
       // console.log('/content/select/user/4/' + ((page - 1) * 10) + '/10')
       this.tableData = res.data.records
