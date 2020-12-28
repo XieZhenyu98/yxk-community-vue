@@ -62,7 +62,6 @@ export default {
     },
     async paginationChange (page) {
       const { data: res } = await this.$http.get('/content/select/user/' + this.userInfo.id + '/' + page + '/10')
-      console.log(res)
       // console.log('/content/select/user/4/' + ((page - 1) * 10) + '/10')
       this.tableData = res.data.records
       this.page = res.data
