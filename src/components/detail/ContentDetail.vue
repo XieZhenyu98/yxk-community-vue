@@ -58,8 +58,14 @@
     </div>
     <el-row>
       <el-col align="center" style="font-size: 26px">
-        <a href="#" @click.prevent="doSupportFun()"><i class="el-icon-thumb"></i><span style="font-size: 26px">({{ supportNum }})</span></a>
-        <a href="#" style="margin-left: 16px;margin-right: 16px;"><i class="el-icon-star-off"></i><span style="font-size: 26px">({{ collectionNum }})</span></a>
+        <a href="#" @click.prevent="doSupportFun()">
+          <i class="el-icon-thumb"></i>
+          <span style="font-size: 26px">({{ supportNum }})</span>
+        </a>
+        <a href="#" @click.prevent="doCollectionFun()" style="margin-left: 16px;margin-right: 16px;">
+          <i class="el-icon-star-off"></i>
+          <span style="font-size: 26px">({{ collectionNum }})</span>
+        </a>
         <a href="#"><i class="el-icon-share"></i><span style="font-size: 26px">(0)</span></a>
       </el-col>
       <el-col align="right" style="font-size: 26px">
@@ -97,6 +103,10 @@ export default {
         contentId: this.$route.query.contentId,
         userId: 1
       },
+      doCollection: {
+        user_id: 1,
+        content_id: this.$route.query.contentId
+      },
       supportNum: 0,
       collectionNum: 0
     }
@@ -109,6 +119,8 @@ export default {
     this.userVo = res.data.userVo
     this.time = res.data.time.split(' ')[0]
     this.supportNum = (await this.$http.get('support/content/count/' + this.doSupport.contentId)).data.data
+    this.collectionNum = (await this.$http.get('collection/count/' + this.doCollection.content_id)).data.data
+    console.log(this.collectionNum)
   },
   methods: {
     open () {
@@ -172,6 +184,18 @@ export default {
       } else {
         this.supportNum = this.supportNum + 1
         this.$message.success('鼓励成功！')
+      }
+      this.$forceUpdate()
+    },
+    async doCollectionFun () {
+      this.doCollection.user_id = JSON.parse(window.sessionStorage.getItem('user')).id
+      const { data: res } = await this.$http.post('collection/do', this.doCollection)
+      if (res.data === 0) {
+        this.collectionNum = this.collectionNum - 1
+        this.$message.error('取消收藏!')
+      } else {
+        this.collectionNum = this.collectionNum + 1
+        this.$message.success('收藏成功！')
       }
       this.$forceUpdate()
     },
