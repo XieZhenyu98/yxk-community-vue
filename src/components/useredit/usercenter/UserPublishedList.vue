@@ -44,7 +44,7 @@ export default {
   name: 'UserPublishedList',
   async created () {
     this.userInfo = JSON.parse(window.sessionStorage.getItem('user'))
-    const { data: res } = (await this.$http.get('/content/select/user/4/0/10'))
+    const { data: res } = (await this.$http.get('/content/select/user/' + this.userInfo.id + '/0/10'))
     this.tableData = res.data.records
     this.page = res.data
   },
