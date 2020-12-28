@@ -27,8 +27,8 @@ export default {
   name: 'ReReply',
   props: ['replyItem'],
   async created () {
-    const { data: res } = (await this.$http.get('reply/list/re/' + this.replyItem.contentId + '/' + this.replyItem.id + '/0/10'))
-    for (const item in res.data.records) {
+    const { data: res } = (await this.$http.get('reply/list/re/' + this.replyItem.contentId + '/' + this.replyItem.id + '/0/100'))
+    for (var item = 0; item < res.data.records.length; item++) {
       this.supportNum[item] = (await this.$http.get('support/reply/count/' + res.data.records[item].id)).data.data
     }
     this.reply = res.data.records

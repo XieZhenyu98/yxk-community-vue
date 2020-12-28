@@ -59,7 +59,7 @@
     <el-row>
       <el-col align="center" style="font-size: 26px">
         <a href="#" @click.prevent="doSupportFun()"><i class="el-icon-thumb"></i><span style="font-size: 26px">({{ supportNum }})</span></a>
-        <a href="#" style="margin-left: 16px;margin-right: 16px;"><i class="el-icon-star-off"></i><span style="font-size: 26px">(0)</span></a>
+        <a href="#" style="margin-left: 16px;margin-right: 16px;"><i class="el-icon-star-off"></i><span style="font-size: 26px">({{ collectionNum }})</span></a>
         <a href="#"><i class="el-icon-share"></i><span style="font-size: 26px">(0)</span></a>
       </el-col>
       <el-col align="right" style="font-size: 26px">
@@ -97,7 +97,8 @@ export default {
         contentId: this.$route.query.contentId,
         userId: 1
       },
-      supportNum: 0
+      supportNum: 0,
+      collectionNum: 0
     }
   },
   async created () {
