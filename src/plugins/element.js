@@ -3,7 +3,7 @@ import Vue from 'vue'
 import {
   Button, Main, Container, Footer, Header, Row, Col, Card, Table, TableColumn, Tag, Menu, Submenu, MenuItem, Calendar,
   Link, Form, FormItem, Input, Message, Radio, RadioGroup, Select, Option, OptionGroup, Tooltip, Loading, Divider, MessageBox,
-  Dropdown, DropdownItem, DropdownMenu, Avatar, Aside, Pagination
+  Dropdown, DropdownItem, DropdownMenu, Avatar, Aside, Pagination, Upload
 } from 'element-ui'
 
 Vue.use(Button)
@@ -38,6 +38,7 @@ Vue.use(Container)
 Vue.use(Main)
 Vue.use(Aside)
 Vue.use(Pagination)
+Vue.use(Upload)
 Vue.use(Loading)
 Vue.prototype.$message = Message
 Vue.prototype.$msgbox = MessageBox

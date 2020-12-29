@@ -12,6 +12,10 @@ import BasicSettings from '@/components/useredit/BasicSettings'
 import UserMessage from '@/components/useredit/UserMessage'
 import UserPublishedList from '@/components/useredit/usercenter/UserPublishedList'
 import UserCollectionList from '@/components/useredit/usercenter/UserCollectionList'
+import UserInfoEdit from '@/components/useredit/basicsetting/UserInfoEdit'
+import UserImage from '@/components/useredit/basicsetting/UserImage'
+import UserPassword from '@/components/useredit/basicsetting/UserPassword'
+import UserBind from '@/components/useredit/basicsetting/UserBind'
 
 Vue.use(VueRouter)
 
@@ -72,7 +76,30 @@ const routes = [
       {
         path: 'basicSetting',
         name: 'basicSetting',
-        component: BasicSettings
+        component: BasicSettings,
+        redirect: '/userEdit/basicSetting/userInfoEdit',
+        children: [
+          {
+            path: 'userInfoEdit',
+            name: 'userInfoEdit',
+            component: UserInfoEdit
+          },
+          {
+            path: 'userImage',
+            name: 'userImage',
+            component: UserImage
+          },
+          {
+            path: 'userPassword',
+            name: 'userPassword',
+            component: UserPassword
+          },
+          {
+            path: 'userBind',
+            name: 'userBing',
+            component: UserBind
+          }
+        ]
       },
       {
         path: 'userMessage',
