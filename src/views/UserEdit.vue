@@ -13,7 +13,7 @@
         <el-row style="margin-top: 10px">
           <el-col :span="18" :offset="3">
             <el-container>
-              <el-aside width="200px" style="height: 750px;background-color: #545c64;border-radius: 3px">
+              <el-aside width="200px" style="height: 300px;background-color: #545c64;border-radius: 3px">
                 <el-menu
                   :default-active="selectActive+''"
                   class="el-menu-vertical-demo"
