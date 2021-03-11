@@ -1,11 +1,17 @@
 <template>
   <div style="margin-top: 20px">
+    <image-upload></image-upload>
   </div>
 </template>
 
 <script>
+import ImageUpload from '@/components/useredit/basicsetting/ImageUpload'
 export default {
-  name: 'UserImage'
+  name: 'UserImage',
+  components: {
+    // eslint-disable-next-line vue/no-unused-components
+    ImageUpload
+  }
 }
 </script>
 
