@@ -111,7 +111,6 @@ export default {
     finish (type) {
       if (type === 'blob') {
         this.$refs.cropper.getCropBlob((data) => {
-          console.log(data)
           var img = window.URL.createObjectURL(data)
           this.model = true
           this.modelSrc = img

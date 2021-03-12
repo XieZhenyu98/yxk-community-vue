@@ -15,7 +15,7 @@
       </el-col>
       <el-col>
         <i class="el-icon-apple"></i>钻石:{{ user.diamonds }}
-        <span style="color: #a3a6a7"><i class="el-icon-time"></i>{{ user.joiningTime.split(" ")[0] }}加入</span>
+        <span style="color: #a3a6a7"><i class="el-icon-time"></i>{{ user.joiningTime }}加入</span>
         <span style="color: #a3a6a7"><i class="el-icon-map-location"></i>来自{{ user.city }}</span>
       </el-col>
       <el-col>
@@ -44,6 +44,7 @@ export default {
     this.baseUrl = this.$http.defaults.baseURL
     const { data: res } = (await this.$http.get('user/' + this.userId))
     this.user = res.data
+    this.user.joiningTime = this.user.joiningTime.split(' ')[0]
   }
 }
 </script>

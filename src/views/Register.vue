@@ -97,7 +97,6 @@ export default {
     },
     register () {
       window.sessionStorage.clear()
-      console.log(this.loginForm)
       this.$refs.longinFromRef.validate(async valid => {
         if (!valid) return
         const { data: res } = (await this.$http.post('user/add', this.loginForm))

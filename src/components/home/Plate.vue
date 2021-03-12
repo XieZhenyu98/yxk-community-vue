@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     async handleSelect (key) {
-      console.log('key' + key)
       if (key === 'all') {
         const { data: resPate } = (await this.$http.get('content/0/10'))
         this.contentList = resPate.data.records

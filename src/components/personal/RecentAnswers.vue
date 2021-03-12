@@ -23,7 +23,6 @@ export default {
   },
   async created () {
     const { data: res } = (await this.$http.get('reply/select/personal/' + this.userId + '/0/10'))
-    console.log(res.data)
     this.replyList = res.data
   },
   methods: {
