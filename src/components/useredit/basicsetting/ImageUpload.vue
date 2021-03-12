@@ -134,12 +134,13 @@ export default {
       this.$refs.cropper.getCropBlob(async (data) => {
         const fd = new FormData()
         fd.append('file', data)
-        console.log(this.userInfo)
         const { data: res } = (await this.$http.post('file/userImageUpload/' + _this.userInfo.id, fd, { headers: { 'Content-Type': 'multipart/form-data' } }))
         this.showCropperDialog = false
         // eslint-disable-next-line eqeqeq
         if (res.code == -1) return this.$message.error('上传失败！')
         this.$message.success('上传成功！')
+        _this.userInfo.image = res.data
+        window.sessionStorage.setItem('user', JSON.stringify(_this.userInfo))
       })
     },
     uploadImg (e, num, type = 'user_picture') {
