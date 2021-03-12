@@ -43,7 +43,7 @@
           <button @click="rotateRight" class="btn">右转</button>
           <button @click="finish('base64')" class="btn">预览(base64)</button>
           <!-- <button @click="finish('blob')" class="btn">preview(blob)</button> -->
-          <a @click="down('base64')" class="btn">download(base64)</a>
+          <a @click="down('base64')" class="btn">确定更换头像</a>
           <!-- <a @click="down('blob')" class="btn">确认上传</a> -->
 
         </div>
