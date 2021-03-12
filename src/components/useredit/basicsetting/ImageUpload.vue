@@ -134,7 +134,7 @@ export default {
       this.$refs.cropper.getCropBlob(async (data) => {
         const fd = new FormData()
         fd.append('file', data)
-        const { data: res } = (await this.$http.post('file/userImageUpload/' + _this.userInfo.id, fd, { headers: { 'Content-Type': 'multipart/form-data' } }))
+        const { data: res } = (await this.$http.post('file/userImageUpload', fd, { headers: { 'Content-Type': 'multipart/form-data' } }))
         this.showCropperDialog = false
         // eslint-disable-next-line eqeqeq
         if (res.code == -1) return this.$message.error('上传失败！')
