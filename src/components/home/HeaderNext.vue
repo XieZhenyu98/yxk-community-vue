@@ -12,7 +12,7 @@
       <span class="span1"><el-link @click="toUserCollectionList()">我收藏的贴</el-link></span>
     </el-col>
     <el-col :span="6" style="text-align: right;padding-right: 20px;align-items: center">
-      <i class="el-icon-search" style="font-size: 20px;padding-right: 20px;"></i>
+      <el-link @click="toSearchMore"><i class="el-icon-search" style="font-size: 20px;padding-right: 20px;"></i></el-link>
       <el-button type="primary" size="small" @click="toPublish">发表新帖</el-button>
     </el-col>
   </el-row>
@@ -33,6 +33,9 @@ export default {
     },
     toUserCollectionList () {
       this.$router.push('/userEdit/userCenter/userCollectionList')
+    },
+    toSearchMore () {
+      this.$router.push('/searchMore')
     }
   }
 }

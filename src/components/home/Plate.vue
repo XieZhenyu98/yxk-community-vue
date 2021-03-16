@@ -8,6 +8,7 @@
             <template slot="title">{{ item.moduleName }}</template>
             <el-menu-item :key="itemSon.id" :index="itemSon.id+''" v-for="itemSon in item.sonModuleList">{{ itemSon.moduleName }}</el-menu-item>
           </el-submenu>
+          <div style="float: right;margin-top: 12px"><el-link @click="toSearchMore">查看更多</el-link></div>
         </el-menu>
       </div>
       <div :key="content.id" v-for="content in contentList">
@@ -44,6 +45,9 @@ export default {
         const { data: resPate } = (await this.$http.get('content/0/5/' + key))
         this.contentList = resPate.data.records
       }
+    },
+    toSearchMore () {
+      this.$router.push('/searchMore')
     }
   },
   async created () {
