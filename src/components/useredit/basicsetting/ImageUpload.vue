@@ -74,7 +74,6 @@ export default {
       showCropperDialog: false,
       option: {
         img: '',
-        // img: '',//裁剪图片的地址
         size: 1,
         full: false, // 是否输出原图比例的截图
         outputType: 'png', // 裁剪生成图片的格式
