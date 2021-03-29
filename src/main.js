@@ -19,7 +19,7 @@ import './assets/css/markdowm.css'
 // 导入对axios的支持
 import axios from 'axios'
 // 配置请求的根路径
-axios.defaults.baseURL = 'http://10.11.35.183:8888'
+axios.defaults.baseURL = 'http://127.0.0.1:8888'
 // axios对请求进行拦截，进行预处理
 axios.interceptors.request.use(config => {
   if (!isEmpty(window.sessionStorage.getItem('token'))) {

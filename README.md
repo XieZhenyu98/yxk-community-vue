@@ -1,5 +1,8 @@
 # yxk-community-vue
 
+## 后端项目
+[https://github.com/XieZhenyu98/yxkCommunity](https://github.com/XieZhenyu98/yxkCommunity)
+
 ## 安装依赖
 ```
 npm install
