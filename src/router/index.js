@@ -17,6 +17,8 @@ import UserImage from '@/components/useredit/basicsetting/UserImage'
 import UserPassword from '@/components/useredit/basicsetting/UserPassword'
 import UserBind from '@/components/useredit/basicsetting/UserBind'
 import SearchMore from '@/views/SearchMore'
+import Plate from '@/views/Plate'
+import SonModuleDetail from '@/views/SonModuleDetail'
 
 Vue.use(VueRouter)
 
@@ -113,6 +115,16 @@ const routes = [
     path: '/searchMore',
     name: 'searchMore',
     component: SearchMore
+  },
+  {
+    path: '/plate',
+    name: 'plate',
+    component: Plate
+  },
+  {
+    path: '/sonModuleDetail',
+    name: 'sonModuleDetail',
+    component: SonModuleDetail
   }
 ]
 

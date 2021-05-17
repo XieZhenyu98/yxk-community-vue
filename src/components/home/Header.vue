@@ -3,8 +3,8 @@
     <el-col :span="18" :offset="3" style="height: 100%">
       <el-row style="height: 100%">
         <el-col class="gray" :span="6"><img src="../../assets/yklogo.png" height="300px" style="margin-top: -120px"/></el-col>
-        <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><i class="el-icon-chat-dot-round" style="font-size: 25px;margin-right: 2px;"></i>交流</el-col>
-        <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><i class="el-icon-video-camera-solid" style="font-size: 25px;margin-right: 2px;"></i>点播</el-col>
+        <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><div @click="toHome()"><i class="el-icon-chat-dot-round" style="font-size: 25px;margin-right: 2px;"></i>首页</div></el-col>
+        <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><div @click="toPlate()"><i class="el-icon-date" style="font-size: 25px;margin-right: 2px;"></i>板块</div></el-col>
         <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><i class="el-icon-s-data" style="font-size: 25px;margin-right: 2px;"></i>资源</el-col>
         <!-- 登录与注册、用户名 -->
         <el-col :span="8" :offset="4" style="padding-top: 12px;display:table-cell;">
@@ -72,6 +72,12 @@ export default {
     },
     toUserEdit () {
       this.$router.push('/userEdit/basicSetting')
+    },
+    toPlate () {
+      this.$router.push('/Plate')
+    },
+    toHome () {
+      this.$router.push('/')
     }
   }
 }
