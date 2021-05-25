@@ -22,6 +22,7 @@
                     @focus="focus"
                     @blur="blur"
                     @keyup.enter.native="searchHandler"
+                    @input="changeSearch"
                     placeholder="搜索标题或内容"
                   >
                     <el-button slot="append" icon="el-icon-search" id="search" @click="searchHandler"></el-button>
@@ -45,13 +46,14 @@
                         closable
                         :type="search.type"
                         @close="closeHandler(search)"
+                        @click="clickHistorySearch(search)"
                         style="margin-right:5px; margin-bottom:5px;"
                       >{{search.name}}</el-tag>
                       <dt class="search-title">热门搜索</dt>
-                      <dd v-for="search in hotSearchList" :key="search.id">{{search}}</dd>
+                      <dd @click="clickKeywords(search.keywords)" v-for="search in hotSearchList" :key="search.id"><a href="#">{{search.keywords}}</a></dd>
                     </dl>
                     <dl v-if="isSearchList">
-                      <dd v-for="search in searchList" :key="search.id">{{search}}</dd>
+                      <dd @click="clickKeywords(search.keywords)" v-for="search in searchList" :key="search.id"><a href="#">{{search.keywords}}</a></dd>
                     </dl>
                   </el-card>
                 </el-col>
@@ -59,6 +61,23 @@
             </el-card>
           </el-col>
         </el-row>
+        <div style="width: 100%;margin-top: 20px">
+          <el-row style="margin-top: 20px">
+            <el-col :span="18" :offset="3">
+              <el-card class="box-card">
+                <div v-if="contentList.length == 0">
+                  暂无数据
+                </div>
+                <div @click="toDetail(item.id)" style="text-align: left" v-for="item in contentList" :key="item.id">
+                  <span v-html="item.title"></span>
+                  <p v-html="item.content"></p>
+                  <div style="text-align: right">{{ item.time }}</div>
+                  <hr style=" height:2px;border:none;border-top:1px solid #EBEEF5;" />
+                </div>
+              </el-card>
+            </el-col>
+          </el-row>
+        </div>
         <!-- 第三行底部 -->
         <Foot></Foot>
       </el-row>
@@ -82,10 +101,32 @@ export default {
       historySearchList: [],
       searchList: ['暂无数据'],
       history: false,
-      types: ['', 'success', 'info', 'warning', 'danger']
+      types: ['', 'success', 'info', 'warning', 'danger'],
+      contentList: []
     }
   },
   methods: {
+    async clickKeywords (keywords) {
+      this.search = keywords
+      const { data: res } = (await this.$http.get('es/content?keywords=' + keywords + '&pageNo=' + 1 + '&pageSize=' + 10))
+      this.contentList = res.data
+    },
+    async changeSearch () {
+      const { data: res } = (await this.$http.get('searchKeywords/getSearchKeywordsByKeywords?pageSize=' + 10 + '&keywords=' + this.search))
+      this.searchList = res.data.records
+      console.log(this.searchList)
+    },
+    async clickHistorySearch (search) {
+      this.search = search.name
+      const { data: res } = (await this.$http.get('es/content?keywords=' + search.name + '&pageNo=' + 1 + '&pageSize=' + 10))
+      this.contentList = res.data
+    },
+    async toDetail (id) {
+      // await this.$router.push('/detail/' + this.dyItem.id)
+      await this.$router.push({
+        path: '/detail', query: { contentId: id }
+      })
+    },
     loadHistory () {
       return JSON.parse(localStorage.getItem('searchHistory'))
     },
@@ -113,7 +154,7 @@ export default {
     enterSearchBoxHanlder () {
       clearTimeout(this.searchBoxTimeout)
     },
-    searchHandler () {
+    async searchHandler () {
       const n = this.getRandomNumber(0, 5)
       const exist =
         this.historySearchList.filter(value => {
@@ -124,6 +165,8 @@ export default {
         this.saveHistory(this.historySearchList)
       }
       this.history = this.historySearchList.length !== 0
+      const { data: res } = (await this.$http.get('es/content?keywords=' + this.search + '&pageNo=' + 1 + '&pageSize=' + 10))
+      this.contentList = res.data
     },
     closeHandler (search) {
       this.historySearchList.splice(this.historySearchList.indexOf(search), 1)
@@ -144,6 +187,10 @@ export default {
     isSearch () {
       return this.isFocus
     }
+  },
+  async created () {
+    const { data: res } = (await this.$http.get('searchKeywords/getSearchKeywordsByCount?pageSize=' + 10))
+    this.hotSearchList = res.data.records
   }
 }
 </script>
