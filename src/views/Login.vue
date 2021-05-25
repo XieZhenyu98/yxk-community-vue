@@ -87,7 +87,10 @@ export default {
 
 <style lang="less" scoped>
 .login_container{
-  background-color: #2b4b6b;
+  // background-color: #2b4b6b;
+  //background-color: #909399;
+  background-image: url("../assets/login_back.jpg");
+  background-size:100% 100%;
   height: 100%;
 }
 .login_box{
@@ -102,9 +105,9 @@ export default {
 
 .avatar_box{
   height: 60px;
-  width: 250px;
+  width: 330px;
   border: 1px solid #eee;
-  border-radius: 15%;
+  border-radius: 30px;
   padding: 10px;
   box-shadow: 0 0 10px #ddd;
   position: absolute;

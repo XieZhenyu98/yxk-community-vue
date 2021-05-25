@@ -1,5 +1,5 @@
 <template>
-  <el-calendar :range="['2019-03-04', '2019-03-10']" class="calendar-el">
+  <el-calendar :range="['2021-05-17', '2021-05-23']" class="calendar-el">
     <template
       slot="dateCell"
       slot-scope="{date, data}">

@@ -2,12 +2,12 @@
   <el-row style="height: 100%" align="left">
     <el-col :span="18" :offset="3" style="height: 100%">
       <el-row style="height: 100%">
-        <el-col class="gray" :span="6"><img src="../../assets/yklogo.png" height="300px" style="margin-top: -120px"/></el-col>
+        <el-col class="gray" :span="7"><img src="../../assets/yklogo.png" height="300px" style="margin-top: -120px"/></el-col>
         <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><div @click="toHome()"><i class="el-icon-chat-dot-round" style="font-size: 25px;margin-right: 2px;"></i>首页</div></el-col>
         <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><div @click="toPlate()"><i class="el-icon-date" style="font-size: 25px;margin-right: 2px;"></i>板块</div></el-col>
         <el-col :span="2" style="font-size: 18px;padding-top: 16px;text-align: left;color: #EBEEF5"><i class="el-icon-s-data" style="font-size: 25px;margin-right: 2px;"></i>资源</el-col>
         <!-- 登录与注册、用户名 -->
-        <el-col :span="8" :offset="4" style="padding-top: 12px;display:table-cell;">
+        <el-col :span="7" :offset="4" style="padding-top: 12px;display:table-cell;">
           <!-- user不存在显示 -->
           <el-link v-if="!isLogin" :underline="false" @click="toLogin" style="margin-top: 6px"><span style="font-size: 18px;"><i class="el-icon-user-solid"></i>登录</span></el-link>
           <el-link v-if="!isLogin" :underline="false" @click="toRegister" style="margin-top: 6px"><span style="font-size: 18px;margin-left: 20px;">注册</span></el-link>
